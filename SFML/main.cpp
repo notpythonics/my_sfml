@@ -1,9 +1,21 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-int main(){
-	sf::RenderWindow window(sf::VideoMode(800, 600), "game");
+constexpr float WIDTH = 800;
+constexpr float HEIGHT = 600;
 
+int main(){
+	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "game");
+	sf::CircleShape shape(20.0f);
+	shape.setFillColor(sf::Color::Magenta);
+	shape.setPosition(100.0f, 100.0f);
+
+	sf::RectangleShape rectangle (sf::Vector2f(100,40));
+	rectangle.setFillColor(sf::Color::Magenta);
+	rectangle.setOrigin(sf::Vector2f(50, 20)); // change the pivot    half of the the size
+	rectangle.setPosition(sf::Vector2f(400, 400));
+	rectangle.setRotation(90);
+	
 	//game loop
 	while (window.isOpen()) {
 		sf::Event event;
@@ -15,7 +27,10 @@ int main(){
 		}
 		// clearing without displaying throws an exception
 		window.clear(sf::Color::Black); // clear bellon al asoad     it's on the back buffer
-		// draw
+		
+		window.draw(shape);
+		window.draw(rectangle);
+
 		window.display(); // copies the data from the back buffer to the screen
 	}
 }
